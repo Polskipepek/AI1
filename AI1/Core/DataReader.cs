@@ -5,7 +5,7 @@ internal class DataReader {
 
         DataTable dt = new();
         using StreamReader sr = new StreamReader(path);
-        if (sr.Peek() == -1)
+        if (sr.Peek() == -1) 
             throw new Exception("PiesOutOfBoundsExeption.");
 
         string[] headers = sr.ReadLine().Split(',');

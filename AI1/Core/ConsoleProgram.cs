@@ -56,16 +56,16 @@ namespace AI1.Core {
 
         public static Dictionary<string, double> GetIntCalculations(IEnumerable<int> ints) {
             return new Dictionary<string, double> {
-                { "Mean", ints.CalcMean() },
+                { "Mean\t", ints.CalcMean() },
                 { "Truncated Mean", ints.CalcTruncatedMean() },
                 { "Dominant", ints.CalcDominant() },
-                { "Median", ints.CalcMedian() },
+                { "Median\t", ints.CalcMedian() },
                 { "Variance", ints.CalcVariance() },
-                { "Standard Deviation", ints.CalcStandardDevation() },
+                { "Stand.Deviation", ints.CalcStandardDevation() },
                 { "Percentile 1", ints.CalcPercentile(25) },
                 { "Percentile 2", ints.CalcPercentile(50) },
                 { "Percentile 3", ints.CalcPercentile(75) },
-                { "Percentile 3 - 1", ints.CalcPercentile(75) - ints.CalcPercentile(25) }
+                { "Percentile 3-1", ints.CalcPercentile(75) - ints.CalcPercentile(25) }
             };
         }
     }

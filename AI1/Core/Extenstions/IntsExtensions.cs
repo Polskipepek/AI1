@@ -1,6 +1,6 @@
 ﻿namespace AI1.Infrastructure.Extenstions {
     internal static class IntsExtensions {
-        public static double CalcMean(this IEnumerable<int> numbers) => numbers.Average();
+        public static double CalcMean(this IEnumerable<int> numbers) => Math.Round(numbers.Average(), 2);
 
         public static double CalcTruncatedMean(this IEnumerable<int> numbers) {
             var numbersCount = numbers.Count();
@@ -10,7 +10,7 @@
                 orderedNumbers.RemoveAt(i);
                 orderedNumbers.RemoveAt(orderedNumbers.Count - 1);
             }
-            return orderedNumbers.Average();
+            return Math.Round(orderedNumbers.Average(), 2);
         }
 
         public static int CalcDominant(this IEnumerable<int> numbers) {
@@ -41,10 +41,11 @@
                 variance += Math.Pow(number - mean, 2);
             }
             variance /= numbers.Count();
-            return variance;
+            return Math.Round(variance, 2);
         }
 
-        public static double CalcStandardDevation(this IEnumerable<int> numbers) => Math.Sqrt(numbers.CalcVariance());
+        public static double CalcStandardDevation(this IEnumerable<int> numbers) => Math.Round(Math.Sqrt(numbers.CalcVariance()), 2);
+
 
         public static double CalcPercentile(this IEnumerable<int> numbers, double p) {
             var sortedData = numbers.OrderBy(x => x).ToList();
