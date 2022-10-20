@@ -1,4 +1,5 @@
 ﻿using AI1.Infrastructure.Extenstions;
+using AI1.Model;
 using System.Reflection;
 
 namespace AI1.Core {
@@ -7,7 +8,7 @@ namespace AI1.Core {
             if (!(airQualitiesPropNames?.Any() == true))
                 return;
 
-            Console.WriteLine("FeaturesPies:");
+            Console.WriteLine("Features:");
             for (int i = 0; i < airQualitiesPropNames.Count(); i++) {
                 Console.WriteLine($"{i + 1}. {airQualitiesPropNames.ElementAt(i)}");
             }
@@ -24,7 +25,7 @@ namespace AI1.Core {
             if (int.TryParse(userInput, out int result) == false) DisplayFeatures(airQualitiesPropNames);
 
             if (result < 1 || result > props) {
-                Console.WriteLine("Wrong-PiesNotFound");
+                Console.WriteLine("NotFound");
                 Console.WriteLine();
                 Thread.Sleep(1000);
                 Console.Clear();
@@ -41,7 +42,7 @@ namespace AI1.Core {
             int selectedFeatureId = ConsoleProgram.SelectFeature(propNames);
             var type = props.First(x => x.Name == propNames.ElementAt(selectedFeatureId)).PropertyType;
 
-            Console.WriteLine($"Selected Feature: {propNames.ElementAt(selectedFeatureId)}, of typePies: {type.Name}");
+            Console.WriteLine($"Selected Feature: {propNames.ElementAt(selectedFeatureId)}, of types: {type.Name}");
             return type;
         }
 
@@ -56,10 +57,10 @@ namespace AI1.Core {
 
         public static Dictionary<string, double> GetIntCalculations(IEnumerable<int> ints) {
             return new Dictionary<string, double> {
-                { "Mean\t", ints.CalcMean() },
+                { "Mean", ints.CalcMean() },
                 { "Truncated Mean", ints.CalcTruncatedMean() },
                 { "Dominant", ints.CalcDominant() },
-                { "Median\t", ints.CalcMedian() },
+                { "Median", ints.CalcMedian() },
                 { "Variance", ints.CalcVariance() },
                 { "Stand.Deviation", ints.CalcStandardDevation() },
                 { "Percentile 1", ints.CalcPercentile(25) },
@@ -67,6 +68,37 @@ namespace AI1.Core {
                 { "Percentile 3", ints.CalcPercentile(75) },
                 { "Percentile 3-1", ints.CalcPercentile(75) - ints.CalcPercentile(25) }
             };
+        }
+
+        public static void WriteCalcs(IEnumerable<int> column, string columnName = "") {
+            Console.WriteLine();
+            var calcs = ConsoleProgram.GetIntCalculations(column);
+            if (!columnName.Equals("")) {
+                Console.Write($"{columnName};");
+            }
+            foreach (var calc in calcs) {
+                Console.Write($"{calc.Value};");
+            }
+        }
+
+        public static void WriteAllCalcsForAirQuiality(List<AirQuality> airQualities) {
+            var keys = ConsoleProgram.GetIntCalculations(airQualities.Select(x => x.CO_GT)).Select(x => x.Key).Prepend("Feature");
+            Console.Write($"{string.Join(";", keys)}");
+
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.CO_GT), "CO_GT");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S1), "PT08_S1");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.NMHC_GT), "NMHC_GT");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.C6H6_GT), "C6H6_GT");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S2), "PT08_S2");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.NOx_GT), "NOx_GT");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S3), "PT08_S3");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.NO2_GT), "NO2_GT");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S4), "PT08_S4");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S5), "PT08_S5");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.T), "T");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.RH), "RH");
+            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.AH), "AH");
+            Console.WriteLine();
         }
     }
 }
