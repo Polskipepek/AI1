@@ -10,28 +10,4 @@
     <PackageReference Include="Microsoft.ML.FastTree" Version="1.6.0" />
     <PackageReference Include="Microsoft.ML.LightGbm" Version="1.6.0" />
   </ItemGroup>
-  <ItemGroup Label="ChessModel1">
-    <None Include="ChessModel1.consumption.cs">
-      <DependentUpon>ChessModel1.mbconfig</DependentUpon>
-    </None>
-    <None Include="ChessModel1.training.cs">
-      <DependentUpon>ChessModel1.mbconfig</DependentUpon>
-    </None>
-    <None Include="ChessModel1.zip">
-      <DependentUpon>ChessModel1.mbconfig</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup Label="ChessModel">
-    <None Include="ChessModel.consumption.cs">
-      <DependentUpon>ChessModel.mbconfig</DependentUpon>
-    </None>
-    <None Include="ChessModel.training.cs">
-      <DependentUpon>ChessModel.mbconfig</DependentUpon>
-    </None>
-    <None Include="ChessModel.zip">
-      <DependentUpon>ChessModel.mbconfig</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>
