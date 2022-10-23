@@ -55,24 +55,24 @@ namespace AI1.Core {
             return Array.Empty<string>();
         }
 
-        public static Dictionary<string, double> GetIntCalculations(IEnumerable<int> ints) {
+        public static Dictionary<string, double> GetDoubleCalculations(IEnumerable<double> doubles) {
             return new Dictionary<string, double> {
-                { "Mean", ints.CalcMean() },
-                { "Truncated Mean", ints.CalcTruncatedMean() },
-                { "Dominant", ints.CalcDominant() },
-                { "Median", ints.CalcMedian() },
-                { "Variance", ints.CalcVariance() },
-                { "Stand.Deviation", ints.CalcStandardDevation() },
-                { "Percentile 1", ints.CalcPercentile(25) },
-                { "Percentile 2", ints.CalcPercentile(50) },
-                { "Percentile 3", ints.CalcPercentile(75) },
-                { "Percentile 3-1", ints.CalcPercentile(75) - ints.CalcPercentile(25) }
+                { "Mean", doubles.CalcMean() },
+                { "Truncated Mean", doubles.CalcTruncatedMean() },
+                { "Dominant", doubles.CalcDominant() },
+                { "Median", doubles.CalcMedian() },
+                { "Variance", doubles.CalcVariance() },
+                { "Stand.Deviation", doubles.CalcStandardDevation() },
+                { "Percentile 1", doubles.CalcPercentile(25) },
+                { "Percentile 2", doubles.CalcPercentile(50) },
+                { "Percentile 3", doubles.CalcPercentile(75) },
+                { "Percentile 4", doubles.CalcPercentile(75) - doubles.CalcPercentile(25) }
             };
         }
 
-        public static void WriteCalcs(IEnumerable<int> column, string columnName = "") {
+        public static void WriteCalcs(IEnumerable<double> column, string columnName = "") {
             Console.WriteLine();
-            var calcs = ConsoleProgram.GetIntCalculations(column);
+            var calcs = GetDoubleCalculations(column);
             if (!columnName.Equals("")) {
                 Console.Write($"{columnName};");
             }
@@ -82,22 +82,22 @@ namespace AI1.Core {
         }
 
         public static void WriteAllCalcsForAirQuiality(List<AirQuality> airQualities) {
-            var keys = ConsoleProgram.GetIntCalculations(airQualities.Select(x => x.CO_GT)).Select(x => x.Key).Prepend("Feature");
+            var keys = ConsoleProgram.GetDoubleCalculations(airQualities.Select(x => x.CO_GT)).Select(x => x.Key).Prepend("Feature");
             Console.Write($"{string.Join(";", keys)}");
 
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.CO_GT), "CO_GT");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S1), "PT08_S1");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.NMHC_GT), "NMHC_GT");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.C6H6_GT), "C6H6_GT");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S2), "PT08_S2");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.NOx_GT), "NOx_GT");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S3), "PT08_S3");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.NO2_GT), "NO2_GT");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S4), "PT08_S4");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.PT08_S5), "PT08_S5");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.T), "T");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.RH), "RH");
-            ConsoleProgram.WriteCalcs(airQualities.Select(x => x.AH), "AH");
+            WriteCalcs(airQualities.Select(x => x.CO_GT), "CO_GT");
+            WriteCalcs(airQualities.Select(x => x.PT08_S1), "PT08_S1");
+            WriteCalcs(airQualities.Select(x => x.NMHC_GT), "NMHC_GT");
+            WriteCalcs(airQualities.Select(x => x.C6H6_GT), "C6H6_GT");
+            WriteCalcs(airQualities.Select(x => x.PT08_S2), "PT08_S2");
+            WriteCalcs(airQualities.Select(x => x.NOx_GT), "NOx_GT");
+            WriteCalcs(airQualities.Select(x => x.PT08_S3), "PT08_S3");
+            WriteCalcs(airQualities.Select(x => x.NO2_GT), "NO2_GT");
+            WriteCalcs(airQualities.Select(x => x.PT08_S4), "PT08_S4");
+            WriteCalcs(airQualities.Select(x => x.PT08_S5), "PT08_S5");
+            WriteCalcs(airQualities.Select(x => x.T), "T");
+            WriteCalcs(airQualities.Select(x => x.RH), "RH");
+            WriteCalcs(airQualities.Select(x => x.AH), "AH");
             Console.WriteLine();
         }
     }

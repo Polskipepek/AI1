@@ -1,8 +1,8 @@
 ﻿namespace AI1.Infrastructure.Extenstions {
-    internal static class IntsExtensions {
-        public static double CalcMean(this IEnumerable<int> numbers) => Math.Round(numbers.Average(), 2);
+    internal static class DoublesExtensions {
+        public static double CalcMean(this IEnumerable<double> numbers) => Math.Round(numbers.Average(), 2);
 
-        public static double CalcTruncatedMean(this IEnumerable<int> numbers) {
+        public static double CalcTruncatedMean(this IEnumerable<double> numbers) {
             var numbersCount = numbers.Count();
             var orderedNumbers = numbers.OrderBy(x => x).ToList();
 
@@ -13,8 +13,8 @@
             return Math.Round(orderedNumbers.Average(), 2);
         }
 
-        public static int CalcDominant(this IEnumerable<int> numbers) {
-            var numberIncidence = new Dictionary<int, int>();
+        public static double CalcDominant(this IEnumerable<double> numbers) {
+            var numberIncidence = new Dictionary<double, int>();
 
             foreach (var num in numbers) {
                 if (numberIncidence.ContainsKey(num)) {
@@ -26,14 +26,14 @@
             return numberIncidence.MaxBy(x => x.Value).Key;
         }
 
-        public static int CalcMedian(this IEnumerable<int> numbers) {
+        public static int CalcMedian(this IEnumerable<double> numbers) {
             var list = numbers.OrderBy(x => x).ToList();
             return list.Count % 2 == 0
                 ? (list.IndexOf(list.Count / 2 - 1) + list.IndexOf(list.Count / 2)) / 2
                 : list.IndexOf(list.Count / 2);
         }
 
-        public static double CalcVariance(this IEnumerable<int> numbers) {
+        public static double CalcVariance(this IEnumerable<double> numbers) {
             double mean = numbers.CalcMean();
             double variance = 0;
 
@@ -44,10 +44,10 @@
             return Math.Round(variance, 2);
         }
 
-        public static double CalcStandardDevation(this IEnumerable<int> numbers) => Math.Round(Math.Sqrt(numbers.CalcVariance()), 2);
+        public static double CalcStandardDevation(this IEnumerable<double> numbers) => Math.Round(Math.Sqrt(numbers.CalcVariance()), 2);
 
 
-        public static double CalcPercentile(this IEnumerable<int> numbers, double p) {
+        public static double CalcPercentile(this IEnumerable<double> numbers, double p) {
             var sortedData = numbers.OrderBy(x => x).ToList();
 
             if (p >= 100.0d) return sortedData[^1];

@@ -4,9 +4,8 @@ using AI1;
 using AI1.Core;
 using AI1.Core.Mappers;
 using AI1.Model;
-using System.Linq;
 using System.Reflection;
-
+using Microsoft.Win32;
 Console.WriteLine("Hello, Halinka!");
 Console.WriteLine();
 
@@ -19,14 +18,14 @@ var selectedDataType = Console.ReadLine();
 DataReader reader = new();
 
 PropertyInfo[]? props = null;
-//Type propType;
 List<AirQuality> airQualities = new();
 List<Chess> chessList = new();
+
 
 var rootPath = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.FullName;
 switch (selectedDataType) {
     case "1":
-        var table = reader.ReadData($"{rootPath}\\Data\\AirQualityUCI.txt");
+        var table = reader.ReadData($"{rootPath}\\Data\\AirQualityUCI.csv", ";");
         airQualities = TableToAirQualityMapper.Map(table);
 
         ConsoleProgram.WriteAllCalcsForAirQuiality(airQualities);
