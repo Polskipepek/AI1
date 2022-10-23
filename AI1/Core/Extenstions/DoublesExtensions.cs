@@ -26,11 +26,12 @@
             return numberIncidence.MaxBy(x => x.Value).Key;
         }
 
-        public static int CalcMedian(this IEnumerable<double> numbers) {
+        public static double CalcMedian(this IEnumerable<double> numbers) {
             var list = numbers.OrderBy(x => x).ToList();
-            return list.Count % 2 == 0
-                ? (list.IndexOf(list.Count / 2 - 1) + list.IndexOf(list.Count / 2)) / 2
-                : list.IndexOf(list.Count / 2);
+            var res = list.Count % 2 == 0
+                ? (list[list.Count / 2 - 1] + list[list.Count / 2]) / 2d
+                : list[list.Count / 2];
+            return res;
         }
 
         public static double CalcVariance(this IEnumerable<double> numbers) {

@@ -33,7 +33,7 @@ namespace AI1
                                     .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Kr", @"Kr"),new InputOutputColumnPair(@"Rr", @"Rr"),new InputOutputColumnPair(@"kr2", @"kr2")}))      
                                     .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Kc",@"Rc",@"kc2",@"Kr",@"Rr",@"kr2"}))      
                                     .Append(mlContext.Transforms.Conversion.MapValueToKey(@"result", @"result"))      
-                                    .Append(mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryEstimator:mlContext.BinaryClassification.Trainers.FastTree(new FastTreeBinaryTrainer.Options(){NumberOfLeaves=96,MinimumExampleCountPerLeaf=128,NumberOfTrees=18601,MaximumBinCountPerFeature=177,LearningRate=0.12112850586807F,FeatureFraction=0.849658793818366F,LabelColumnName=@"result",FeatureColumnName=@"Features"}), labelColumnName: @"result"))      
+                                    .Append(mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryEstimator:mlContext.BinaryClassification.Trainers.FastForest(new FastForestBinaryTrainer.Options(){NumberOfTrees=4,FeatureFraction=1F,LabelColumnName=@"result",FeatureColumnName=@"Features"}), labelColumnName: @"result"))      
                                     .Append(mlContext.Transforms.Conversion.MapKeyToValue(@"PredictedLabel", @"PredictedLabel"));
 
             return pipeline;

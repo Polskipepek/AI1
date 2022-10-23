@@ -21,7 +21,6 @@ PropertyInfo[]? props = null;
 List<AirQuality> airQualities = new();
 List<Chess> chessList = new();
 
-
 var rootPath = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.FullName;
 switch (selectedDataType) {
     case "1":
@@ -31,7 +30,6 @@ switch (selectedDataType) {
         ConsoleProgram.WriteAllCalcsForAirQuiality(airQualities);
         break;
     case "2":
-
         props = typeof(Chess).GetProperties();
         string bkc, wkc, wrc;
         int bkr, wkr, wrr;
@@ -68,7 +66,7 @@ static void CreateChessPosition(out string bkc, out int bkr, out string wkc, out
     bkr = 0;
     while (bkr < 1 || bkr > 8) {
         Console.Write($"Black King Row (1-8): ");
-        int.TryParse(Console.ReadLine() ?? "0", out bkr);
+        _ = int.TryParse(Console.ReadLine() ?? "0", out bkr);
     }
 
     wkc = "0";
@@ -80,7 +78,7 @@ static void CreateChessPosition(out string bkc, out int bkr, out string wkc, out
     wkr = 0;
     while (wkr < 1 || wkr > 8) {
         Console.Write($"White King Row (1-8): ");
-        int.TryParse(Console.ReadLine() ?? "0", out wkr);
+        _ = int.TryParse(Console.ReadLine() ?? "0", out wkr);
 
     }
 
@@ -93,6 +91,6 @@ static void CreateChessPosition(out string bkc, out int bkr, out string wkc, out
     wrr = 0;
     while (wrr < 1 || wrr > 8) {
         Console.Write($"White Rook Row (1-8): ");
-        int.TryParse(Console.ReadLine() ?? "0", out wrr);
+        _ = int.TryParse(Console.ReadLine() ?? "0", out wrr);
     }
 }

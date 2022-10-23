@@ -83,7 +83,7 @@ namespace AI1.Core {
 
         public static void WriteAllCalcsForAirQuiality(List<AirQuality> airQualities) {
             var keys = ConsoleProgram.GetDoubleCalculations(airQualities.Select(x => x.CO_GT)).Select(x => x.Key).Prepend("Feature");
-            Console.Write($"{string.Join(";", keys)}");
+            Console.WriteLine($"{string.Join(";", keys)}");
 
             WriteCalcs(airQualities.Select(x => x.CO_GT), "CO_GT");
             WriteCalcs(airQualities.Select(x => x.PT08_S1), "PT08_S1");
